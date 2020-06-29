@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Home page</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+
+<body>
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4> Total Results : {{count}} </h5>
+            </div>
+        </div>
+        {% for result in results %}
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span style="display: inline">
+                        <h5> title : {{result['_source']['title_sin']}} </h5>
+                        <h5> artist : {{result['_source']['artist_sin']}} </h5>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <h5> writer : {{result['_source']['writer_sin']}} </h5>
+                    <h5> musics by : {{result['_source']['music_sin']}} </h5>
+                    <h5> lyrics : {{result['_source']['song']}} </h5>
+
+                    <h5> title english : {{result['_source']['title_en']}} </h5>
+                    <h5> artist english : {{result['_source']['artist']}} </h5>
+                    <h5> writer english : {{result['_source']['writer']}} </h5>
+
+                    <h5> genre : {{result['_source']['genre']}} </h5>
+                    <h5> total visits : {{result['_source']['total_visits']}} </h5>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</body>
+
+</html>
