@@ -65,9 +65,9 @@ def classifyQuery(tokens):
 
     for token in tokens:
         if (not re.search('[a-zA-Z]', token)):
-            
+
             # song by title
-            
+
             if(token not in stopwords_all):
                 addToResultTokens(result, "title", token)
 
@@ -111,8 +111,6 @@ def classifyQuery(tokens):
                         if(other_word not in removed):
                             if(other_word != token):
                                 addToResultTokens(result, "artist", other_word)
-
-    
 
             else:
                 addToResultTokens(result, "raw", token)
@@ -166,7 +164,7 @@ def classifyQuery(tokens):
             if (token in stopwords_writer):
                 result['writer_weight'] = 2
             if (token in stopwords_subject):
-                result['subject_weight'] = 2
+                result['subject_weight'] = 3
 
         else:
             if(isGenreToken(token)):
@@ -176,27 +174,31 @@ def classifyQuery(tokens):
 
         listIndex = listIndex + 1
 
-    for key in ['raw', 'title', 'artist', 'writer', 'lyrics', 'stopwords', 'genre']:
+    for key in ['raw', 'title', 'artist', 'writer', 'lyrics', 'stopwords', ]:
         for word in result[key]:
             if word not in result['stopwords']:
                 addToResultTokens(result, "stopword_excluded", word)
 
-        for word in result['genre']:
-            addToResultTokens(result, "stopword_excluded", word)
+        #for word in result['genre']:
+            #addToResultTokens(result, "stopword_excluded", word)
 
     return result
 
 
 def isGenreToken(token):
-    genres = ['Old Pops', 'New Pop', 'Request', 'Classics',
-              'Golden Oldies', 'Golden Pop', 'Inspirational', 'Duets', 'Movie Songs', 'Calypso', 'Current Songs',
-              'Group Songs', 'duet', 'reques', 'Kids Songs', 'Movie', 'My Picks']
-
-    for i in genres:
-        if token in i:
-            return True
+    if (re.search('[a-zA-Z]', token)):
+        return True
     else:
         return False
+    # genres = ['Old Pops', 'New Pop', 'Request', 'Classics',
+    #           'Golden Oldies', 'Golden Pop', 'Inspirational', 'Duets', 'Movie Songs', 'Calypso', 'Current Songs',
+    #           'Group Songs', 'duet', 'reques', 'Kids Songs', 'Movie', 'My Picks']
+
+    # for i in genres:
+    #     if token in i:
+    #         return True
+    # else:
+    #     return False
 
 
 def getTokens(query):

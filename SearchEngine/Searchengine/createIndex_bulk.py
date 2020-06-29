@@ -21,9 +21,9 @@ request_body = {
                 "punctuation_remove_filter": {
                     "type": "mapping",
                     "mappings": [
-                            ". => '\\u0020'",
-                            ", => '\\u0020'",
-                            "| => '\\u0020'"
+                            ". => \\u0020",
+                            ", => \\u0020",
+                            "| => \\u0020"
                     ]
                 }
             },
@@ -45,13 +45,13 @@ request_body = {
 
                 "ngram_lyric_filter": {
                     "type": "edge_ngram",
-                    "min_gram": 5,
+                    "min_gram": 3,
                     "max_gram": 20
                 },
 
                 "ngram_title_filter": {
                     "type": "edge_ngram",
-                    "min_gram": 3,
+                    "min_gram": 5,
                     "max_gram": 20
                 }
             },
@@ -60,8 +60,8 @@ request_body = {
 
                 "artist_analyzer": {
                     "type": "custom",
-                    "tokenizer": "whitespace",
                     "char_filter": ["punctuation_remove_filter"],
+                    "tokenizer": "whitespace",
                     "filter": ["ngram_artist_filter"],
 
                 },
@@ -70,14 +70,14 @@ request_body = {
                     "type": "custom",
                     "tokenizer": "whitespace",
                     "char_filter": ["punctuation_remove_filter"],
-                    "filter": ["ngram_lyric_filter"],
+                    "filter": ["ngram_title_filter"],
 
                 },
 
                 "lyric_analyzer": {
                     "type": "custom",
-                    "tokenizer": "whitespace",
                     "char_filter": ["punctuation_remove_filter"],
+                    "tokenizer": "whitespace",
                     "filter": [],
 
                 },
@@ -144,7 +144,7 @@ request_body = {
             },
             "song": {
                 "type": "text",
-                "analyzer": "lyric_analyzer",
+                "analyzer": "lyric_analyzer_ngram",
                 "search_analyzer": "lyric_analyzer"
             },
             "total_visits": {
