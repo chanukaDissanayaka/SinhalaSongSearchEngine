@@ -190,15 +190,6 @@ def isGenreToken(token):
         return True
     else:
         return False
-    # genres = ['Old Pops', 'New Pop', 'Request', 'Classics',
-    #           'Golden Oldies', 'Golden Pop', 'Inspirational', 'Duets', 'Movie Songs', 'Calypso', 'Current Songs',
-    #           'Group Songs', 'duet', 'reques', 'Kids Songs', 'Movie', 'My Picks']
-
-    # for i in genres:
-    #     if token in i:
-    #         return True
-    # else:
-    #     return False
 
 
 def getTokens(query):

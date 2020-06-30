@@ -32,7 +32,7 @@ request_body = {
 
                 "ngram_artist_filter": {
                     "type": "edge_ngram",
-                    "min_gram": 4,
+                    "min_gram": 2,
                     "max_gram": 10,
                     "token_chars": ["letter"]
                 },

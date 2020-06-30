@@ -210,47 +210,23 @@ def matchParams(tokens):
                                 "fields": ["title_sin", "artist_sin", "writer_sin", "music_sin", "song^2", "genre"],
                             }
                         },
-
-                        # {
-                        #     "match": {
-                        #         'song': ' '.join(tokens['stopword_excluded']),
-                        #     },
-                        # },
-                        # {
-                        #     "match": {
-                        #         'title_sin': ' '.join(tokens['stopword_excluded']),
-                        #     },
-                        # },
-                        # {
-                        #     "match": {
-                        #         'artist_sin': ' '.join(tokens['stopword_excluded']),
-                        #     },
-                        # },
-                        # {
-                        #     "match": {
-                        #         'writer_sin': ' '.join(tokens['stopword_excluded']),
-                        #     },
-                        # },
-                        # {
-                        #     "match": {
-                        #         'music_sin': ' '.join(tokens['stopword_excluded']),
-                        #     },
-                        # },
-                        # {
-                        #     "match": {
-                        #         'genre': ' '.join(tokens['stopword_excluded']),
-                        #     },
-                        # }
-
-
                     ]
                 }
             }
 
     if (len(tokens['stopword_excluded']) == 0):
-        query = {
-            "match_all": {}
-        }
+        if(len(tokens['raw']) == 0):
+            query = {
+                "match_all": {}
+            }
+        else:
+            query = {
+                "multi_match": {
+                    "query": " ".join(tokens['raw']),
+                    "operator":   "or",
+                    "fields": ["title_sin", "artist_sin", "writer_sin", "music_sin", "song", "genre"]
+                }
+            }
 
     return query
 
